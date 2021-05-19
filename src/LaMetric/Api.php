@@ -24,18 +24,16 @@ class Api
      */
     public function fetchData(array $parameters = []): FrameCollection
     {
-        /**
-         * You can call whatever API you want and extract data as array or object
-         *
-         * object $this->client (Guzzle HTTP) is available to make curl requests
-         * array $this->credentials contains sensitive data
-         * array $parameters (credentials) can contain sensitive data
-         *
-         * Here for example, we will return IP of user
-         */
+
+        $url = 'https://finnhub.io/api/v1/quote?symbol=' . $parameters['symbol'] . '&token=' . $this->credentials['api_key'];
+        $res = $this->client->request('GET', $url);
+
+        $json = (string) $res->getBody();
+
+        $data = json_decode($json);
 
         return $this->mapData([
-            'ip' => $_SERVER['REMOTE_HOST'] ?? 'UNKNOWN',
+            'price' => '$' . round($data->c, 2)
         ]);
     }
 
@@ -52,7 +50,7 @@ class Api
          * Transform data as FrameCollection and Frame
          */
         $frame = new Frame();
-        $frame->setText($data['ip']);
+        $frame->setText($data['price']);
         $frame->setIcon('');
 
         $frameCollection->addFrame($frame);
