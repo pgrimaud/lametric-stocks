@@ -4,18 +4,9 @@
             "LaMetric\\": "src/LaMetric"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "LaMetric\\tests\\": "tests"
-        }
-    },
     "require": {
         "php": "^8.0",
         "ext-json": "*",
         "guzzlehttp/guzzle": "^6.5"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^9.5",
-        "php-coveralls/php-coveralls": "^2.2"
     }
 }

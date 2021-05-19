@@ -9,7 +9,7 @@ class FrameCollection
     /**
      * @var array
      */
-    private $frames;
+    private array $frames;
 
     /**
      * @param Frame $frame

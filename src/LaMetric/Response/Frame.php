@@ -9,12 +9,12 @@ class Frame
     /**
      * @var string
      */
-    private $text = '';
+    private string $text = '';
 
     /**
      * @var string
      */
-    private $icon = '';
+    private string $icon = '';
 
     /**
      * @return string

@@ -11,7 +11,7 @@ class Validator
     /**
      * @var array
      */
-    private $parameters = [];
+    private array $parameters;
 
     /**
      * @param array $parameters

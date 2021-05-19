@@ -17,7 +17,7 @@ try {
     $validator = new Validator($_GET);
     $validator->check($parameters);
 
-    $api    = new Api(new Client(), $credentials);
+    $api    = new Api(new Client, $credentials);
     $frames = $api->fetchData($validator->getData());
 
     echo $response->printData($frames);
