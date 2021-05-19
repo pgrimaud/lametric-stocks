@@ -51,7 +51,7 @@ class Api
          */
         $frame = new Frame();
         $frame->setText($data['price']);
-        $frame->setIcon('45180');
+        $frame->setIcon('34');
 
         $frameCollection->addFrame($frame);
 
