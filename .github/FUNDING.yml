@@ -1,6 +1,4 @@
 # These are supported funding model platforms
 
 github: pgrimaud
-custom: https://www.paypal.me/grimaudpierre
-
-custom: https://paypal.me/nisouc
+custom: ['https://paypal.me/grimaudpierre', 'https://paypal.me/nisouc']
