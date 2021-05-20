@@ -27,7 +27,7 @@ class Api
     {
         $parameters['symbol'] = strtoupper($parameters['symbol']);
 
-        $redisKey = 'stocks:' . $parameters['symbol'];
+        $redisKey = 'lametric:stocks:' . strtolower($parameters['symbol']);
         $json = $this->redisClient->get($redisKey);
 
         if (!$json) {
