@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace LaMetric;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\Client as HttpClient;
+use Predis\Client as RedisClient;
 use LaMetric\Response\{Frame, FrameCollection};
 
 class Api
 {
     /**
-     * @param Client $client
+     * @param HttpClient $HttpClient
      * @param array $credentials
      */
-    public function __construct(private Client $client, private array $credentials = [])
+    public function __construct(private HttpClient $httpClient, private RedisClient $redisClient, private array $credentials = [])
     {
     }
 
@@ -24,10 +25,19 @@ class Api
      */
     public function fetchData(array $parameters = []): FrameCollection
     {
-        $url = 'https://finnhub.io/api/v1/quote?symbol=' . $parameters['symbol'] . '&token=' . $this->credentials['api_key'];
+        $parameters['symbol'] = strtoupper($parameters['symbol']);
 
-        $res = $this->client->request('GET', $url);
-        $json = (string) $res->getBody();
+        $redisKey = 'stocks:' . $parameters['symbol'];
+        $json = $this->redisClient->get($redisKey);
+
+        if (!$json) {
+            $url = 'https://finnhub.io/api/v1/quote?symbol=' . $parameters['symbol'] . '&token=' . $this->credentials['api_key'];
+
+            $res = $this->httpClient->request('GET', $url);
+            $json = (string) $res->getBody();
+
+            $this->redisClient->set($redisKey, $json, 'ex', 60);
+        }
 
         $data = json_decode($json);
 
