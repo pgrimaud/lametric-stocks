@@ -38,7 +38,17 @@ class Api
         if ($parameters['stock_name'] === 'true') {
             array_unshift($responseData, $parameters['symbol']);
         }
+   
+        if ($parameters['daily_change'] === 'true') {
 
+            $previousPrice = $data->pc;
+            $changePercent = round(100 -($data->pc / $data->c) * 100, 2); 
+
+            $percentage = $changePercent >= 0 ? '+' : '' . $changePercent . '%';
+
+            array_push($responseData, $percentage);
+        }
+        
         return $this->mapData($responseData);
     }
 
@@ -58,7 +68,20 @@ class Api
         foreach ($data as $value) {
             $frame = new Frame();
             $frame->setText($value);
-            $frame->setIcon('34');
+
+            switch($value[0]) {
+                case '-':
+                    $frame->setIcon('124');
+                    break;
+                case '+':
+                    $frame->setIcon('120');
+                    break;
+                case '$':
+                    $frame->setIcon('34');
+                    break;
+                default:
+                    $frame->setIcon('');
+            }
 
             $frameCollection->addFrame($frame);
         }
