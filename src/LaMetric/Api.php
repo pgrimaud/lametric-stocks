@@ -42,9 +42,9 @@ class Api
         if ($parameters['daily_change'] === 'true') {
 
             $previousPrice = $data->pc;
-            $changePercent = round(100 -($data->pc / $data->c) * 100, 2); 
+            $changePercent = round(100 - ($data->pc / $data->c) * 100, 2); 
 
-            $percentage = $changePercent >= 0 ? '+' : '' . $changePercent . '%';
+            $percentage = ($changePercent >= 0 ? '+' : '') . $changePercent . '%';
 
             array_push($responseData, $percentage);
         }
