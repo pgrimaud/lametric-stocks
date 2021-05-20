@@ -4,7 +4,7 @@ Easily check and display stock prices on your LaMetric clock.
 
 ![stocks](https://user-images.githubusercontent.com/1866496/118955473-03b29900-b95f-11eb-9ff2-b6948a988cfe.gif)
 
-Based on the [Finnhub stock API](https://finnhub.io/)
+Based on the [Finnhub Stock API](https://finnhub.io/)
 
 
 # Donations 🙏
